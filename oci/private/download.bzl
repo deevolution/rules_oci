@@ -7,13 +7,13 @@ def _auth_to_header(url, auth):
         if auth_url == url:
             auth_val = auth[auth_url]
 
-            if auth_val["type"] == "basic":
+            if auth_val.get("type", "") == "basic":
                 credentials = base64.encode("{}:{}".format(auth_val["login"], auth_val["password"]))
                 return [
                     "--header",
                     "Authorization: Basic {}".format(credentials),
                 ]
-            elif auth_val["type"] == "pattern":
+            elif auth_val.get("type", "") == "pattern":
                 token = auth_val["pattern"].replace("<password>", auth_val["password"])
                 return [
                     "--header",
