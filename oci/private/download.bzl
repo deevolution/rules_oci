@@ -72,6 +72,7 @@ def _download(
     command = [
         "curl",
         url,
+        "--netrc",
         "--fail-with-body",
         "--location",
         "--no-progress-meter",
