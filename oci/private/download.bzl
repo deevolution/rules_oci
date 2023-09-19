@@ -23,7 +23,7 @@ def _auth_to_header(url, auth):
 
 def _debug(message):
     # Change to true when debugging
-    if True:
+    if False:
         # buildifier: disable=print
         print(message)
 
@@ -72,8 +72,7 @@ def _download(
     command = [
         "curl",
         url,
-        "--netrc-file",
-	"/root/.netrc",
+        "--netrc",
         "--fail-with-body",
         "--location",
         "--no-progress-meter",
@@ -91,7 +90,6 @@ def _download(
 
     command.extend(_auth_to_header(url, auth))
     rctx.file(headers_output_path)
-    _debug("Command: {}".format(command))
     result = rctx.execute(command)
 
     _debug("""\nSTDOUT\n{}\nSTDERR\n{}""".format(result.stdout, result.stderr))
