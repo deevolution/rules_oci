@@ -91,7 +91,7 @@ def _download(
     command.extend(_auth_to_header(url, auth))
     rctx.file(headers_output_path)
     _debug("Command: {}".format(command))
-    env = {"HOME": rctx.os.environ.get("HOME"))}
+    env = {"HOME": rctx.os.environ.get("HOME")}
     result = rctx.execute(command, environment=env)
 
     _debug("""\nSTDOUT\n{}\nSTDERR\n{}""".format(result.stdout, result.stderr))
