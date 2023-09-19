@@ -90,7 +90,7 @@ def _download(
 
     command.extend(_auth_to_header(url, auth))
     rctx.file(headers_output_path)
-
+    print(command)
     result = rctx.execute(command)
 
     _debug("""\nSTDOUT\n{}\nSTDERR\n{}""".format(result.stdout, result.stderr))
