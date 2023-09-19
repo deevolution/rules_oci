@@ -72,7 +72,8 @@ def _download(
     command = [
         "curl",
         url,
-        "--netrc",
+        "--netrc-file",
+	"/root/.netrc",
         "--fail-with-body",
         "--location",
         "--no-progress-meter",
@@ -91,8 +92,7 @@ def _download(
     command.extend(_auth_to_header(url, auth))
     rctx.file(headers_output_path)
     _debug("Command: {}".format(command))
-    env = {"HOME": rctx.os.environ.get("HOME")}
-    result = rctx.execute(command, environment=env)
+    result = rctx.execute(command)
 
     _debug("""\nSTDOUT\n{}\nSTDERR\n{}""".format(result.stdout, result.stderr))
 
